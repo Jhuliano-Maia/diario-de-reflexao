@@ -1,11 +1,17 @@
 import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 
 export default function Index() {
   const router = useRouter();
 
-  function handleNavigationToHome() {
-    router.navigate("/(tabs)/home");
+  const [feeling, setFeeling] = useState<string | null>(null);
+
+  function handleNavigationToHome(feeling: string) {
+    router.push({
+      pathname: "/tabs/home",
+      params: { feeling },
+    });
   }
 
   return (
@@ -17,11 +23,11 @@ export default function Index() {
         <Text style={styles.text2}>Escolha um emoji que represente seu estado de espírito atual</Text>
 
         <View style={styles.emojiContainer}>
-          <Pressable style={styles.emojiButton} onPress={handleNavigationToHome}>
+          <Pressable style={styles.emojiButton} onPress={() => handleNavigationToHome("happy")}>
             <Text style={styles.emoji}>😀</Text>
           </Pressable>
 
-          <Pressable style={styles.emojiButton} onPress={handleNavigationToHome}>
+          <Pressable style={styles.emojiButton} onPress={() => handleNavigationToHome("sad")}>
             <Text style={styles.emoji}>😢</Text>
           </Pressable>
         </View>
