@@ -1,8 +1,13 @@
 import { StatusBar, StyleSheet, Text, View, Pressable } from "react-native";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 export default function Final() {
   const router = useRouter();
+  
+  const { novoXP, novoNivel } = useLocalSearchParams<{
+    novoXP?: string;
+    novoNivel?: string;
+  }>();
 
   const handleNovaReflexao = () => {
     router.push("/");
@@ -13,7 +18,8 @@ export default function Final() {
       <StatusBar backgroundColor="#A8FBD3" />
       <View style={styles.container}>
         <Text style={styles.text}>
-          Parabéns por se expressar! Cuidar dos seus sentimentos é um passo importante. 😊
+          Parabéns por se expressar! Cuidar dos seus sentimentos é um passo importante. 😊{"\n\n"}
+          Você ganhou <Text style={styles.bold}>{novoXP}</Text> XP e está no nível <Text style={styles.bold}>{novoNivel}</Text>!
         </Text>
 
         <Pressable style={styles.button} onPress={handleNovaReflexao}>
@@ -32,12 +38,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#A8FBD3",
   },
   container: {
-    width: 220,
-    minHeight: 150,
+    width: 250,
+    minHeight: 200,
     backgroundColor: "#f0f0f0",
     borderRadius: 20,
-    padding: 16,
-    justifyContent: "space-between",
+    padding: 20,
+    justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
     shadowOpacity: 0.1,
@@ -47,10 +53,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "500",
     textAlign: "center",
-    lineHeight: 22,
+    lineHeight: 24,
     color: '#333',
+  },
+  bold: {
+    fontWeight: 'bold',
+    color: '#20B2AA',
   },
   button: {
     backgroundColor: '#20B2AA',

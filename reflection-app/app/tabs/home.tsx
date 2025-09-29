@@ -6,9 +6,30 @@ export default function Index() {
   const { feeling } = useLocalSearchParams<{ feeling?: string }>();
   const router = useRouter();
   const [inputText, setInputText] = useState('');
+  const [xp, setXp] = useState(0);
+  const [level, setLevel] = useState(1);
+
+  const calcularXP = (texto: string) => {
+    const palavras = texto.trim().split(/\s+/); 
+    return palavras.length;
+  };
+
+  const calcularNivel = (xpTotal: number) => {
+    return Math.floor(xpTotal / 50) + 1;
+  };
 
   const handleConcluir = () => {
-    router.push("/tabs/final");
+    const xpGanho = calcularXP(inputText);
+    const novoXP = xp + xpGanho;
+    const novoNivel = calcularNivel(novoXP);
+
+    setXp(novoXP);
+    setLevel(novoNivel);
+
+    router.push({
+      pathname: "/tabs/final",
+      params: { novoNivel, novoXP },
+    });
   };
 
   return (
