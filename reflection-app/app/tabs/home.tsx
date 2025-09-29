@@ -17,18 +17,22 @@ export default function Index() {
       <View style={styles.container}>
         {feeling === "happy" && (
           <Text style={styles.text}>
-            Que bom que você está feliz! Continue com essa energia positiva, ela é contagiante! Lembre-se de aproveitar cada momento e de que a felicidade está nas pequenas coisas. 😊
+            Que bom que você está feliz!{"\n\n"}
+              Continue com essa energia positiva, ela é contagiante.{"\n\n"}
+              Aproveite cada momento e lembre-se de que a felicidade está nas pequenas coisas. ✨
           </Text>
         )}
         {feeling === "sad" && (
           <Text style={styles.text}>
-            Está tudo bem se sentir triste. As emoções vêm e vão, e se permitir sentir a tristeza é uma forma de cuidado consigo mesmo. Lembre-se que você é forte, e dias melhores virão. 💙
+            Está tudo bem se sentir triste. As emoções vêm e vão, e se permitir sentir a tristeza é uma forma de cuidado consigo mesmo.{"\n\n"}
+  Lembre-se que você é forte, e dias melhores virão. 💙
           </Text>
         )}
 
         <TextInput
           style={styles.textInput}
           placeholder="Escreva como você se sente..."
+          placeholderTextColor="#888"
           multiline
           onChangeText={setInputText}
           value={inputText}
